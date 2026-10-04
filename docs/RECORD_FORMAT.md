@@ -30,7 +30,8 @@ Version 2 is the first form-ready approved record. It preserves the V1 vocabular
 
 ## Ingredients
 Each ingredient is `{quantity, unit, name, note?, scaling?, originalText?}`.
-- `unit`: `g` `kg` `ml` `l` `tsp` `tbsp` `piece` `clove` `pinch` `sprig` `slice` `toTaste`
+- `unit` is a short normalized token rather than a closed vocabulary. Common examples: `g` `kg` `ml` `l` `tsp` `tbsp` `cup` `oz` `lb` `stick` `can` `bunch` `stalk` `piece` `clove` `pinch` `sprig` `slice` `toTaste`.
+- Other sensible lowercase/hyphen unit tokens are allowed so real-world recipes are not forced into the wrong measurement.
 - `toTaste` uses `quantity: null`; every other unit needs a number.
 - The form can retain what the contributor typed in `originalText` while normalising the public row.
 - `scaling` is optional: `linear`, `damped`, `fixed`.
@@ -52,8 +53,10 @@ The form should prepare the image **before** it reaches Git:
 
 ## Rights
 `source` remains `own`, `family`, or `book-or-website`.
-A book/website source requires `permissionNote`. After Director review, the approved record may also carry `sourceTitle` and an HTTPS `sourceUrl`.
-Raw contributor text still cannot contain links, email addresses or social handles.
+A book/website source requires `permissionNote`. After Director review, the approved record may also carry `sourceTitle`, `sourceCreator` and an HTTPS `sourceUrl`.
+Approved Git records may use these resolved rights values: `CC-BY-SA-4.0`, `CC-BY-NC-SA-3.0`, `CC-BY-4.0`, `CC0-1.0`, `PUBLIC-DOMAIN`, or `PERMISSION`.
+`UNKNOWN` is intentionally **not** valid in Git. A contributor may submit "not sure" into private moderation, but the Director must resolve or reject it before approval.
+Raw contributor text still cannot contain links, email addresses or social handles; the dedicated provenance URL field is the exception.
 
 ## Review
 Only **approved** records belong in this repository. A public form submission is not an approved Git record.

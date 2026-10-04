@@ -14,7 +14,8 @@ import json, os, re, struct, sys, datetime
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 TEXT_RULES = json.load(open(os.path.join(ROOT, 'rules', 'text-rules-v1.json'), encoding='utf-8'))
 
-UNITS = ['g', 'kg', 'ml', 'l', 'tsp', 'tbsp', 'piece', 'clove', 'pinch', 'sprig', 'slice', 'toTaste']
+UNIT = re.compile(r'^([a-z][a-z0-9-]{0,19}|toTaste)$')
+LICENCES = ['CC-BY-SA-4.0', 'CC-BY-NC-SA-3.0', 'CC-BY-4.0', 'CC0-1.0', 'PUBLIC-DOMAIN', 'PERMISSION']
 CATEGORIES = ['main', 'soup', 'dessert', 'snack', 'breakfast', 'bread', 'side', 'salad', 'sauce', 'drink']
 DIFFICULTIES = ['easy', 'medium', 'hard']
 DIETS = ['vegetarian', 'vegan', 'gluten-free', 'pescatarian']
@@ -149,8 +150,8 @@ def check_record(rec, filename, root):
             for k in ('quantity', 'unit', 'name'):
                 if k not in row:
                     E.append("%s is missing '%s'" % (tag, k))
-            if 'unit' in row and row['unit'] not in UNITS:
-                E.append("%s: unit '%s' is not allowed. Use one of: %s" % (tag, row['unit'], ', '.join(UNITS)))
+            if 'unit' in row and (not isinstance(row['unit'], str) or not UNIT.match(row['unit'])):
+                E.append("%s: unit '%s' must be a safe lowercase unit token such as g, cup, oz, stick or bunch (or toTaste)" % (tag, row.get('unit')))
             q = row.get('quantity', 0)
             if row.get('unit') == 'toTaste':
                 if q is not None:
@@ -245,16 +246,16 @@ def check_record(rec, filename, root):
                 if p: E.append('contributor.%s %s' % (k, p))
 
     r = rec['rights']
-    if not isinstance(r, dict) or set(r) - {'source', 'confirmedAt', 'licence', 'via', 'evidence', 'permissionNote', 'sourceTitle', 'sourceUrl'}:
+    if not isinstance(r, dict) or set(r) - {'source', 'confirmedAt', 'licence', 'via', 'evidence', 'permissionNote', 'sourceTitle', 'sourceCreator', 'sourceUrl'}:
         E.append("'rights' has missing or unknown fields")
     else:
         if r.get('source') not in SOURCES: E.append('rights.source must be: ' + ', '.join(SOURCES))
         if r.get('via') not in VIA: E.append('rights.via must be: ' + ', '.join(VIA))
-        if r.get('licence') != 'CC-BY-SA-4.0': E.append("rights.licence must be 'CC-BY-SA-4.0'")
+        if r.get('licence') not in LICENCES: E.append('rights.licence must be one of: ' + ', '.join(LICENCES))
         if not (isinstance(r.get('confirmedAt'), str) and valid_date(r['confirmedAt'])): E.append('rights.confirmedAt must be a date like 2026-10-03')
         if r.get('source') == 'book-or-website' and not str(r.get('permissionNote', '')).strip():
             E.append("a recipe from a book or website needs rights.permissionNote saying how permission was given")
-        for k in ('evidence', 'permissionNote', 'sourceTitle'):
+        for k in ('evidence', 'permissionNote', 'sourceTitle', 'sourceCreator'):
             if isinstance(r.get(k), str):
                 p = text_problem(r[k])
                 if p: E.append('rights.%s %s' % (k, p))

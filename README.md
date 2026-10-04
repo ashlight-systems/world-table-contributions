@@ -16,14 +16,19 @@ recipes that people share, reviewed and approved by the Director, with who contr
 | `tools/` | `validate.py` checks every recipe. `test_validate.py` tests the checker itself. |
 | `docs/` | `GIT_FIRST_TIME.md` (start here if Git is new to you) and `RECORD_FORMAT.md`. |
 
-## Licence
-Recipes here are offered under **Creative Commons Attribution-ShareAlike 4.0 (CC BY-SA 4.0)**, the same as the main collection.
-Contributors are credited in each file. Photographs stay with their owners and are included only with their permission.
-See `docs/GIT_FIRST_TIME.md` for adding the official licence text (a `LICENSE` file) when you create the repository.
+## Rights and licences
+This repository can contain more than one legitimate rights path.
+
+- Original community recipes normally use **CC BY-SA 4.0**.
+- Licensed-source recipes preserve the **source licence or explicit permission** recorded in that recipe's `rights` block.
+- `UNKNOWN` rights may exist in private moderation, but **never** in this approved Git repository.
+- Photographs retain their recorded source/owner rights and are included only after review.
+
+Always read the individual recipe record before reusing sourced material; a repository-wide licence does not override a recipe's recorded source licence.
 
 ## How a recipe gets here
 1. Someone shares a recipe (the website form when it exists, or a Facebook comment until then).
-2. The Director reviews it, assigns tags and confirms the rights.
+2. The Director reviews it, assigns tags and resolves the rights/licence.
 3. The approved record is saved in `recipes/` and any photo in `images/`.
 4. The website build reads this repository at a specific **commit** (like a numbered snapshot) so every published page can be traced back to exactly what was approved.
 
