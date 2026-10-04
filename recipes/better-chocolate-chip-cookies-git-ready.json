@@ -1,0 +1,147 @@
+{
+    "schema": "world-table-contribution/2",
+    "id": "community#better-chocolate-chip-cookies",
+    "slug": "better-chocolate-chip-cookies",
+    "title": "Better Chocolate Chip Cookies",
+    "summary": "Large, soft and chewy chocolate chip cookies with sea salt, chocolate and nuts. Chilling the dough before baking improves the texture.",
+    "country": "US",
+    "category": "dessert",
+    "difficulty": "easy",
+    "facts": {
+        "prepMinutes": 20,
+        "cookMinutes": 25,
+        "servings": 18
+    },
+    "ingredients": [
+        {
+            "quantity": 2,
+            "unit": "stick",
+            "name": "unsalted butter",
+            "note": "softened",
+            "originalText": "2 sticks unsalted butter, softened"
+        },
+        {
+            "quantity": 160,
+            "unit": "g",
+            "name": "sugar",
+            "note": "",
+            "originalText": "160 g sugar"
+        },
+        {
+            "quantity": 170,
+            "unit": "g",
+            "name": "brown sugar",
+            "note": "",
+            "originalText": "170 g brown sugar"
+        },
+        {
+            "quantity": 2,
+            "unit": "piece",
+            "name": "eggs",
+            "note": "large",
+            "originalText": "2 large eggs"
+        },
+        {
+            "quantity": 1.5,
+            "unit": "tsp",
+            "name": "vanilla extract",
+            "note": "",
+            "originalText": "1.5 tsp vanilla extract"
+        },
+        {
+            "quantity": 454,
+            "unit": "g",
+            "name": "all-purpose flour",
+            "note": "",
+            "originalText": "454 g / 16 oz (about 3 cups) all-purpose flour"
+        },
+        {
+            "quantity": 1,
+            "unit": "tsp",
+            "name": "coarse sea salt",
+            "note": "",
+            "originalText": "1 tsp coarse sea salt"
+        },
+        {
+            "quantity": 1,
+            "unit": "tsp",
+            "name": "baking powder",
+            "note": "",
+            "originalText": "1 tsp baking powder"
+        },
+        {
+            "quantity": 0.5,
+            "unit": "tsp",
+            "name": "baking soda",
+            "note": "",
+            "originalText": ".5 tsp baking soda"
+        },
+        {
+            "quantity": 345,
+            "unit": "g",
+            "name": "semi-sweet chocolate chips",
+            "note": "",
+            "originalText": "345 g semi-sweet chocolate chips"
+        },
+        {
+            "quantity": 90,
+            "unit": "g",
+            "name": "pecans or walnuts",
+            "note": "",
+            "originalText": "90 g pecans or walnuts"
+        }
+    ],
+    "steps": [
+        "Beat the softened butter, sugar and brown sugar until creamy.",
+        "Add the eggs and vanilla and mix until combined.",
+        "Mix the flour, salt, baking powder and baking soda separately.",
+        "Add the dry ingredients to the butter mixture and stir until almost combined.",
+        "Add the chocolate chips and nuts and mix into a dough.",
+        "Chill the dough for at least 1 hour.",
+        "Heat the oven to 350°F / 175°C. Form the dough into 16–20 large balls and place them on baking trays.",
+        "Bake for about 25 minutes, until the ridges begin to turn golden. Cool on the trays for 5–10 minutes, then transfer to a wire rack."
+    ],
+    "tags": [
+        "chocolate",
+        "cookies",
+        "nuts",
+        "butter",
+        "eggs",
+        "sugar"
+    ],
+    "dietsSuggested": [
+        "vegetarian"
+    ],
+    "image": {
+        "file": "images/better-chocolate-chip-cookies-15bbb77a.jpg",
+        "alt": "Large chocolate chip cookies cooling on a dark baking tray.",
+        "rightsConfirmed": true,
+        "creditName": "Make Better Food (website)"
+    },
+    "contributor": {
+        "displayName": "Shane T",
+        "credit": false,
+        "dedication": ""
+    },
+    "rights": {
+        "source": "book-or-website",
+        "confirmedAt": "2026-10-04",
+        "licence": "CC-BY-NC-SA-3.0",
+        "via": "form",
+        "sourceTitle": "Make Better Food",
+        "sourceCreator": "Kevin Conroy / Make Better Food",
+        "sourceUrl": "https://www.makebetterfood.com/recipes/chocolate-chip-cookies/",
+        "permissionNote": "Republished under the source site's Creative Commons licence."
+    },
+    "review": {
+        "status": "approved",
+        "approvedAt": "2026-10-04",
+        "approvedBy": "director",
+        "rulesVersions": {
+            "veg": "1.1.0",
+            "text": "1.0.0"
+        },
+        "submissionId": "WT-SUB-20261004-E96D247464"
+    },
+    "addedAt": "2026-10-04"
+}
