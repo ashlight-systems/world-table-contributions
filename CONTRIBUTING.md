@@ -3,8 +3,7 @@
 Thank you. The World Table grows by about 20 great recipes a month, hand-picked for quality.
 
 ## How to share
-- **Website form:** next in development. It will guide title/intro, required country, ingredients, smart tags, method, optional photo, rights and an exact site preview before submission.
-- **For now:** comment **"Please add my recipe"** with your recipe on our Facebook page. Your comment is treated as permission to add it under CC BY-SA 4.0.
+- **Website form:** live. It guides title/intro, required country, ingredients (including quick paste/prefill), smart tags, method, optional photo preparation, rights and an exact site preview before submission.
 - Please share **one favourite at a time**. Up to five a week is fine.
 
 ## What we need
@@ -15,8 +14,8 @@ You can also choose a name to be credited and a one-line dedication ("For my Nan
 - **English only.**
 - **Family-friendly.** No profanity, hate, harassment, or sexual or violent content.
 - **No links, email addresses, social handles or personal details.**
-- **Your own words, or your own family's recipe.** If it comes from a book or website, tell us. We will need permission, and may be unable to add it.
-- **Photos:** only photos you own. We may use the recipe without the photo.
+- **Tell us where it came from.** Own/family recipes use the normal community contribution path. For a book, website or other source, provide what you know about the source/licence. You may choose “not sure” in the website form; the Director must resolve or reject it before Git approval.
+- **Photos:** use a photo you own, have permission to use, or that is covered by the recorded source licence. Ashlight prepares a publication copy and may publish the recipe without the photo if image rights are unclear.
 
 ## What happens next
 Every recipe is reviewed. You will **not** get a notification when it is added, and during our early phase we may be slow to respond to edit or takedown requests.

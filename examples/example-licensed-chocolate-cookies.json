@@ -1,0 +1,85 @@
+{
+ "schema": "world-table-contribution/2",
+ "id": "community#example-licensed-chocolate-cookies",
+ "slug": "example-licensed-chocolate-cookies",
+ "title": "Example: licensed-source chocolate cookies",
+ "summary": "A made-up licensed-source example used to prove flexible units and preserved Creative Commons provenance.",
+ "country": "US",
+ "category": "dessert",
+ "difficulty": "easy",
+ "facts": {
+  "prepMinutes": 20,
+  "cookMinutes": 25,
+  "servings": 18
+ },
+ "ingredients": [
+  {
+   "quantity": 2,
+   "unit": "stick",
+   "name": "Unsalted butter",
+   "note": "softened",
+   "originalText": "2 sticks unsalted butter, softened"
+  },
+  {
+   "quantity": 0.75,
+   "unit": "cup",
+   "name": "Sugar",
+   "originalText": "3/4 cup sugar"
+  },
+  {
+   "quantity": 2,
+   "unit": "piece",
+   "name": "Eggs",
+   "note": "large"
+  },
+  {
+   "quantity": 3,
+   "unit": "cup",
+   "name": "All-purpose flour"
+  },
+  {
+   "quantity": 2,
+   "unit": "cup",
+   "name": "Chocolate chips"
+  }
+ ],
+ "steps": [
+  "Beat the softened butter and sugar until creamy, then mix in the eggs.",
+  "Stir in the flour and chocolate chips until a soft cookie dough forms.",
+  "Bake portions of dough until the edges are lightly golden, then cool before serving."
+ ],
+ "tags": [
+  "chocolate",
+  "cookies",
+  "baking"
+ ],
+ "dietsSuggested": [
+  "vegetarian"
+ ],
+ "image": null,
+ "contributor": {
+  "displayName": "Example Source Curator",
+  "credit": false
+ },
+ "rights": {
+  "source": "book-or-website",
+  "confirmedAt": "2026-10-04",
+  "licence": "CC-BY-NC-SA-3.0",
+  "via": "form",
+  "sourceTitle": "Example Licensed Source",
+  "sourceCreator": "Example Creator / Example Source",
+  "sourceUrl": "https://example.com/recipe",
+  "permissionNote": "Republished under the source site's Creative Commons licence."
+ },
+ "review": {
+  "status": "approved",
+  "approvedAt": "2026-10-04",
+  "approvedBy": "director",
+  "rulesVersions": {
+   "veg": "1.1.0",
+   "text": "1.0.0"
+  },
+  "submissionId": "WT-SUB-EXAMPLE-LIC001"
+ },
+ "addedAt": "2026-10-04"
+}

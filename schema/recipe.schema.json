@@ -2,7 +2,7 @@
  "$schema": "https://json-schema.org/draft/2020-12/schema",
  "$id": "world-table-contribution/2",
  "title": "World Table contribution record, version 2",
- "description": "One approved community recipe. V2 is the first form-ready approved record: country remains mandatory, recipes require at least two ingredients and two accepted subject tags, and an optional image must carry usable alt text. Diet claims are suggestions only; the website re-checks them with its own rules.",
+ "description": "One approved community recipe. V2 remains backward compatible while accepting flexible normalized ingredient units and resolved external-source licences/provenance. Pending/UNKNOWN rights never belong in Git.",
  "type": "object",
  "additionalProperties": false,
  "required": [
@@ -123,20 +123,9 @@
       "description": "null only when unit is toTaste."
      },
      "unit": {
-      "enum": [
-       "g",
-       "kg",
-       "ml",
-       "l",
-       "tsp",
-       "tbsp",
-       "piece",
-       "clove",
-       "pinch",
-       "sprig",
-       "slice",
-       "toTaste"
-      ]
+      "type": "string",
+      "pattern": "^([a-z][a-z0-9-]{0,19}|toTaste)$",
+      "description": "Normalized unit token. Common examples: g, kg, ml, l, tsp, tbsp, cup, oz, lb, stick, can, bunch, stalk, piece, clove, pinch, sprig, slice, toTaste. Other safe lowercase unit tokens are allowed."
      },
      "name": {
       "type": "string",
@@ -278,7 +267,15 @@
      "format": "date"
     },
     "licence": {
-     "const": "CC-BY-SA-4.0"
+     "enum": [
+      "CC-BY-SA-4.0",
+      "CC-BY-NC-SA-3.0",
+      "CC-BY-4.0",
+      "CC0-1.0",
+      "PUBLIC-DOMAIN",
+      "PERMISSION"
+     ],
+     "description": "Resolved public licence/permission status. UNKNOWN is allowed in private moderation but never in an approved Git record."
     },
     "via": {
      "enum": [
@@ -307,6 +304,11 @@
      "pattern": "^https://[^\\s]{3,240}$",
      "maxLength": 250,
      "description": "Optional Director-reviewed HTTPS source URL. Raw contributor text still cannot contain links."
+    },
+    "sourceCreator": {
+     "type": "string",
+     "maxLength": 140,
+     "description": "Optional public creator / attribution line for an external source."
     }
    }
   },
