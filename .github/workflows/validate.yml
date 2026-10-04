@@ -1,0 +1,20 @@
+name: Validate recipes
+# Runs the checker every time something is committed. A green tick means every recipe is well-formed.
+
+on: [push, pull_request]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Test the checker itself
+        run: python tools/test_validate.py
+
+      - name: Check every recipe
+        run: python tools/validate.py
