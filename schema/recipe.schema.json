@@ -1,0 +1,332 @@
+{
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "$id": "world-table-contribution/1",
+ "title": "World Table contribution record, version 1",
+ "description": "One approved community recipe. The vocabularies (categories, difficulties, units, diets) match the main collection so the website can treat both the same. Diet claims here are suggestions only: the website re-checks them with its own rules and never trusts them.",
+ "type": "object",
+ "additionalProperties": false,
+ "required": [
+  "schema",
+  "id",
+  "slug",
+  "title",
+  "summary",
+  "country",
+  "category",
+  "difficulty",
+  "facts",
+  "ingredients",
+  "steps",
+  "contributor",
+  "rights",
+  "review",
+  "addedAt"
+ ],
+ "properties": {
+  "schema": {
+   "const": "world-table-contribution/1"
+  },
+  "id": {
+   "type": "string",
+   "pattern": "^community#[a-z0-9][a-z0-9-]{2,60}$",
+   "description": "Always 'community#' + slug."
+  },
+  "slug": {
+   "type": "string",
+   "pattern": "^[a-z0-9][a-z0-9-]{2,60}$",
+   "description": "Matches the file name: recipes/<slug>.json"
+  },
+  "title": {
+   "type": "string",
+   "minLength": 2,
+   "maxLength": 90
+  },
+  "summary": {
+   "type": "string",
+   "minLength": 10,
+   "maxLength": 300,
+   "description": "One or two sentences."
+  },
+  "country": {
+   "type": "string",
+   "pattern": "^[A-Z]{2}$",
+   "description": "ISO 3166-1 alpha-2 code, or ZZ for 'World (undeclared)'."
+  },
+  "category": {
+   "enum": [
+    "main",
+    "soup",
+    "dessert",
+    "snack",
+    "breakfast",
+    "bread",
+    "side",
+    "salad",
+    "sauce",
+    "drink"
+   ]
+  },
+  "difficulty": {
+   "enum": [
+    "easy",
+    "medium",
+    "hard"
+   ]
+  },
+  "facts": {
+   "type": "object",
+   "additionalProperties": false,
+   "required": [
+    "prepMinutes",
+    "cookMinutes",
+    "servings"
+   ],
+   "properties": {
+    "prepMinutes": {
+     "type": "integer",
+     "minimum": 0,
+     "maximum": 1440
+    },
+    "cookMinutes": {
+     "type": "integer",
+     "minimum": 0,
+     "maximum": 1440
+    },
+    "servings": {
+     "type": "integer",
+     "minimum": 1,
+     "maximum": 100
+    }
+   }
+  },
+  "ingredients": {
+   "type": "array",
+   "minItems": 1,
+   "maxItems": 60,
+   "items": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+     "quantity",
+     "unit",
+     "name"
+    ],
+    "properties": {
+     "quantity": {
+      "type": [
+       "number",
+       "null"
+      ],
+      "minimum": 0,
+      "description": "null only when unit is toTaste."
+     },
+     "unit": {
+      "enum": [
+       "g",
+       "kg",
+       "ml",
+       "l",
+       "tsp",
+       "tbsp",
+       "piece",
+       "clove",
+       "pinch",
+       "sprig",
+       "slice",
+       "toTaste"
+      ]
+     },
+     "name": {
+      "type": "string",
+      "minLength": 2,
+      "maxLength": 80
+     },
+     "note": {
+      "type": "string",
+      "maxLength": 120
+     },
+     "scaling": {
+      "enum": [
+       "linear",
+       "damped",
+       "fixed"
+      ],
+      "description": "Optional. The website works it out if missing (toTaste is fixed; most things are linear)."
+     },
+     "originalText": {
+      "type": "string",
+      "maxLength": 160,
+      "description": "What the contributor typed, kept for audit, e.g. '2 cups flour'."
+     }
+    }
+   }
+  },
+  "steps": {
+   "type": "array",
+   "minItems": 1,
+   "maxItems": 40,
+   "items": {
+    "type": "string",
+    "minLength": 10,
+    "maxLength": 600
+   }
+  },
+  "tags": {
+   "type": "array",
+   "maxItems": 12,
+   "uniqueItems": true,
+   "items": {
+    "type": "string",
+    "pattern": "^[a-z][a-z0-9-]{1,24}$"
+   },
+   "description": "Extra lowercase tags (ingredient words, techniques). Country, category and difficulty are added by the website."
+  },
+  "dietsSuggested": {
+   "type": "array",
+   "uniqueItems": true,
+   "items": {
+    "enum": [
+     "vegetarian",
+     "vegan",
+     "gluten-free",
+     "pescatarian"
+    ]
+   },
+   "description": "Suggestions only. Never trusted."
+  },
+  "image": {
+   "oneOf": [
+    {
+     "type": "null"
+    },
+    {
+     "type": "object",
+     "additionalProperties": false,
+     "required": [
+      "file",
+      "rightsConfirmed"
+     ],
+     "properties": {
+      "file": {
+       "type": "string",
+       "pattern": "^images/[a-z0-9][a-z0-9-]*\\.(jpg|jpeg|png|webp)$"
+      },
+      "creditName": {
+       "type": "string",
+       "maxLength": 60
+      },
+      "rightsConfirmed": {
+       "const": true
+      }
+     }
+    }
+   ]
+  },
+  "contributor": {
+   "type": "object",
+   "additionalProperties": false,
+   "required": [
+    "displayName",
+    "credit"
+   ],
+   "properties": {
+    "displayName": {
+     "type": "string",
+     "minLength": 1,
+     "maxLength": 60
+    },
+    "credit": {
+     "type": "boolean",
+     "description": "true = show the name publicly; false = appear as 'community contributor'."
+    },
+    "dedication": {
+     "type": "string",
+     "maxLength": 140,
+     "description": "Optional one-liner shown on the recipe page. Never printed inside cookbooks."
+    }
+   }
+  },
+  "rights": {
+   "type": "object",
+   "additionalProperties": false,
+   "required": [
+    "source",
+    "confirmedAt",
+    "licence",
+    "via"
+   ],
+   "properties": {
+    "source": {
+     "enum": [
+      "own",
+      "family",
+      "book-or-website"
+     ]
+    },
+    "confirmedAt": {
+     "type": "string",
+     "format": "date"
+    },
+    "licence": {
+     "const": "CC-BY-SA-4.0"
+    },
+    "via": {
+     "enum": [
+      "form",
+      "facebook",
+      "email"
+     ]
+    },
+    "evidence": {
+     "type": "string",
+     "maxLength": 200,
+     "description": "e.g. a screenshot file name or where the comment was. No links."
+    },
+    "permissionNote": {
+     "type": "string",
+     "maxLength": 300,
+     "description": "Required when source is book-or-website: how permission was given."
+    }
+   }
+  },
+  "review": {
+   "type": "object",
+   "additionalProperties": false,
+   "required": [
+    "status",
+    "approvedAt",
+    "approvedBy",
+    "rulesVersions"
+   ],
+   "properties": {
+    "status": {
+     "const": "approved"
+    },
+    "approvedAt": {
+     "type": "string",
+     "format": "date"
+    },
+    "approvedBy": {
+     "type": "string",
+     "maxLength": 40
+    },
+    "rulesVersions": {
+     "type": "object",
+     "properties": {
+      "veg": {
+       "type": "string"
+      },
+      "text": {
+       "type": "string"
+      }
+     },
+     "additionalProperties": false
+    }
+   }
+  },
+  "addedAt": {
+   "type": "string",
+   "format": "date"
+  }
+ }
+}

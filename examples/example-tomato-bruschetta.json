@@ -1,0 +1,92 @@
+{
+ "schema": "world-table-contribution/1",
+ "id": "community#example-tomato-bruschetta",
+ "slug": "example-tomato-bruschetta",
+ "title": "Example: tomato bruschetta",
+ "summary": "Toasted bread rubbed with garlic and topped with ripe tomato and basil. This is a made-up example showing the record format.",
+ "country": "IT",
+ "category": "snack",
+ "difficulty": "easy",
+ "facts": {
+  "prepMinutes": 10,
+  "cookMinutes": 5,
+  "servings": 4
+ },
+ "ingredients": [
+  {
+   "quantity": 4,
+   "unit": "slice",
+   "name": "Crusty bread",
+   "note": "about 2 cm thick"
+  },
+  {
+   "quantity": 4,
+   "unit": "piece",
+   "name": "Ripe tomatoes",
+   "note": "diced",
+   "originalText": "4 ripe tomatoes, diced"
+  },
+  {
+   "quantity": 1,
+   "unit": "clove",
+   "name": "Garlic",
+   "note": "peeled, halved"
+  },
+  {
+   "quantity": 2,
+   "unit": "tbsp",
+   "name": "Olive oil"
+  },
+  {
+   "quantity": 1,
+   "unit": "sprig",
+   "name": "Basil",
+   "note": "leaves torn"
+  },
+  {
+   "quantity": null,
+   "unit": "toTaste",
+   "name": "Salt",
+   "scaling": "fixed"
+  }
+ ],
+ "steps": [
+  "Toast or grill the bread slices until golden and crisp on both sides.",
+  "While the bread is still hot, rub one cut side of each slice with the garlic.",
+  "Stir the diced tomato with the olive oil, torn basil and a good pinch of salt, then taste.",
+  "Spoon the tomato over the bread just before serving so the toast stays crisp."
+ ],
+ "tags": [
+  "tomato",
+  "garlic",
+  "basil",
+  "toast"
+ ],
+ "dietsSuggested": [
+  "vegetarian",
+  "vegan"
+ ],
+ "image": null,
+ "contributor": {
+  "displayName": "Example Contributor",
+  "credit": true,
+  "dedication": "For long summer lunches."
+ },
+ "rights": {
+  "source": "own",
+  "confirmedAt": "2026-10-03",
+  "licence": "CC-BY-SA-4.0",
+  "via": "form",
+  "evidence": "example record"
+ },
+ "review": {
+  "status": "approved",
+  "approvedAt": "2026-10-03",
+  "approvedBy": "director",
+  "rulesVersions": {
+   "veg": "1.1.0",
+   "text": "1.0.0"
+  }
+ },
+ "addedAt": "2026-10-03"
+}

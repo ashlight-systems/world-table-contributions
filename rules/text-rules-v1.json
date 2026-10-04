@@ -1,0 +1,77 @@
+{
+ "id": "text-rules",
+ "version": "1.0.0",
+ "updated": "2026-10-03",
+ "purpose": "Checks for user-written text (titles, names, dedications, cook's notes). Read by the web page and by the server so both agree.",
+ "governance": {
+  "tightenOnly": true,
+  "agentsMay": [
+   "add words to badWords"
+  ],
+  "directorOnly": [
+   "remove words",
+   "change patterns",
+   "change allowed ranges"
+  ]
+ },
+ "englishAllowedRanges": [
+  [
+   0,
+   591
+  ],
+  [
+   8192,
+   8303
+  ],
+  [
+   8352,
+   8399
+  ],
+  [
+   8592,
+   8703
+  ],
+  [
+   9728,
+   10175
+  ],
+  [
+   127744,
+   129791
+  ]
+ ],
+ "englishNote": "Latin letters incl. accents (to U+024F), general punctuation, currency, arrows, symbols and emoji. Other scripts are rejected.",
+ "linkPattern": "(https?:\\/\\/|www\\.|\\b[a-z0-9-]+\\.(?:com|net|org|au|io|co|me|ly|info|biz|xyz)\\b|@\\w{2,})",
+ "leet": {
+  "@": "a",
+  "4": "a",
+  "3": "e",
+  "1": "i",
+  "!": "i",
+  "|": "i",
+  "0": "o",
+  "$": "s",
+  "5": "s"
+ },
+ "badWords": [
+  "fuck",
+  "fucking",
+  "shit",
+  "shitty",
+  "cunt",
+  "bitch",
+  "asshole",
+  "bastard",
+  "wank",
+  "wanker",
+  "twat",
+  "dick",
+  "cock",
+  "piss",
+  "slut",
+  "whore",
+  "bollocks",
+  "arse",
+  "prick"
+ ]
+}
