@@ -51,7 +51,7 @@ run('unknown top-level field (typo)', lambda r, t: r.update({'sumary': 'x'}), "u
 run('file name must match the slug', None, "file name must be", filename='something-else.json')
 run('id must be community#slug', setp(['id'], 'community#other-name'), "'id' must be")
 run('slug with capitals or spaces', lambda r, t: r.update({'slug': 'Bad Slug'}), "'slug' must be")
-run('wrong schema tag', setp(['schema'], 'something/2'), "'schema' must be exactly")
+run('wrong schema tag', setp(['schema'], 'something/3'), "'schema' must be exactly")
 # --- vocabularies ---
 run('country must be a code, not a name', setp(['country'], 'Italy'), "'country' must be a 2-letter")
 run('ZZ (World undeclared) is allowed', setp(['country'], 'ZZ'), None)
@@ -65,9 +65,11 @@ run('bad scaling value', lambda r, t: r['ingredients'][0].update({'scaling': 'hu
 run('facts must be whole numbers', setp(['facts', 'servings'], 2.5), 'facts.servings')
 run('servings cannot be zero', setp(['facts', 'servings'], 0), 'facts.servings')
 run('steps cannot be empty', setp(['steps'], []), "'steps' must be a list")
+run('a recipe needs at least two ingredients', setp(['ingredients'], [GOOD['ingredients'][0]]), "'ingredients' must be a list of 2 to 60 items")
 run('a step that is too short', setp(['steps'], ['Mix.']), 'step 1 must be')
 run('diet suggestion outside the list', setp(['dietsSuggested'], ['keto']), "'dietsSuggested' may only contain")
-run('tag with capitals', setp(['tags'], ['Tomato']), "tag 'Tomato'")
+run('fewer than two tags', setp(['tags'], ['tomato']), "'tags' must be a list of 2 to 12 different tags")
+run('tag with capitals', setp(['tags'], ['Tomato','basil']), "tag 'Tomato'")
 run('too many tags', setp(['tags'], ['t%02d' % i for i in range(13)]), "'tags' must be a list")
 run('bad date', setp(['addedAt'], '3/10/2026'), "'addedAt' must be a date")
 run('impossible date', setp(['addedAt'], '2026-13-45'), "'addedAt' must be a date")
@@ -84,19 +86,24 @@ def with_image(size=2000, confirmed=True, name='example-tomato-bruschetta.jpg', 
     def f(rec, tmp):
         if create:
             open(os.path.join(tmp, 'images', name), 'wb').write(b'\xff\xd8' + b'0' * size)
-        rec['image'] = {'file': 'images/' + name, 'rightsConfirmed': confirmed, 'creditName': 'Example Contributor'}
+        rec['image'] = {'file': 'images/' + name, 'alt': 'Tomato bruschetta on toasted bread.', 'rightsConfirmed': confirmed, 'creditName': 'Example Contributor'}
     return f
 run('image with rights confirmed is fine', with_image(), None)
 run('image without rights confirmation', with_image(confirmed=False), 'rightsConfirmed must be true')
 run('image file is missing', with_image(create=False), 'was not found')
 run('image over the size limit', with_image(size=700 * 1024), 'Please shrink it')
-run('image path outside images/', lambda r, t: r.update({'image': {'file': '../secret.jpg', 'rightsConfirmed': True}}), 'image.file must look like')
+run('image without alt text', lambda r, t: r.update({'image': {'file': 'images/example.jpg', 'rightsConfirmed': True}}), 'image.alt must be')
+run('image path outside images/', lambda r, t: r.update({'image': {'file': '../secret.jpg', 'alt': 'A plated recipe photo.', 'rightsConfirmed': True}}), 'image.file must look like')
 run('recipe from a book/website needs a permission note', lambda r, t: r['rights'].update({'source': 'book-or-website'}), 'needs rights.permissionNote')
 run('book/website with a permission note is fine', lambda r, t: r['rights'].update({'source': 'book-or-website', 'permissionNote': 'Author emailed permission in writing.'}), None)
+run('approved source URL may be HTTPS', lambda r, t: r['rights'].update({'sourceUrl': 'https://example.com/recipe-source'}), None)
+run('approved source URL must be HTTPS', lambda r, t: r['rights'].update({'sourceUrl': 'http://example.com/source'}), 'rights.sourceUrl must be')
 run('wrong licence', lambda r, t: r['rights'].update({'licence': 'All-rights-reserved'}), "rights.licence must be")
 run('only approved recipes belong here', lambda r, t: r['review'].update({'status': 'pending'}), "review.status must be 'approved'")
 run('credit must be true or false', lambda r, t: r['contributor'].update({'credit': 'yes'}), 'contributor.credit must be true or false')
 run('credit false with a dedication is allowed', lambda r, t: r['contributor'].update({'credit': False}), None)
+run('review submission receipt may be present', lambda r, t: r['review'].update({'submissionId': 'WT-SUB-ABC12345'}), None)
+run('bad review submission receipt is rejected', lambda r, t: r['review'].update({'submissionId': 'abc'}), 'review.submissionId must look like')
 # --- across files ---
 dup = copy.deepcopy(GOOD); dup['slug'] = 'another-one'; dup['id'] = 'community#another-one'
 run('same title in two files is only a note', None, None, files=[('another-one.json', dup)], warn='same title as')

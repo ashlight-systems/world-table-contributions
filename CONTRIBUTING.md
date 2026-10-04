@@ -3,12 +3,12 @@
 Thank you. The World Table grows by about 20 great recipes a month, hand-picked for quality.
 
 ## How to share
-- **Website form:** coming soon.
+- **Website form:** next in development. It will guide title/intro, required country, ingredients, smart tags, method, optional photo, rights and an exact site preview before submission.
 - **For now:** comment **"Please add my recipe"** with your recipe on our Facebook page. Your comment is treated as permission to add it under CC BY-SA 4.0.
 - Please share **one favourite at a time**. Up to five a week is fine.
 
 ## What we need
-Title, ingredients with amounts, method, the country it comes from (or "not sure" and we'll file it as *World*), and optionally a photo that **you took or own**.
+Title, a short introduction, ingredients with amounts (**at least two**), method, the country it comes from (or *World / multiple origins*), at least two useful subject tags, and optionally a photo that **you took or own**.
 You can also choose a name to be credited and a one-line dedication ("For my Nanna").
 
 ## The rules

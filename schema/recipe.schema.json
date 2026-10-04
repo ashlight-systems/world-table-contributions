@@ -1,8 +1,8 @@
 {
  "$schema": "https://json-schema.org/draft/2020-12/schema",
- "$id": "world-table-contribution/1",
- "title": "World Table contribution record, version 1",
- "description": "One approved community recipe. The vocabularies (categories, difficulties, units, diets) match the main collection so the website can treat both the same. Diet claims here are suggestions only: the website re-checks them with its own rules and never trusts them.",
+ "$id": "world-table-contribution/2",
+ "title": "World Table contribution record, version 2",
+ "description": "One approved community recipe. V2 is the first form-ready approved record: country remains mandatory, recipes require at least two ingredients and two accepted subject tags, and an optional image must carry usable alt text. Diet claims are suggestions only; the website re-checks them with its own rules.",
  "type": "object",
  "additionalProperties": false,
  "required": [
@@ -17,6 +17,8 @@
   "facts",
   "ingredients",
   "steps",
+  "tags",
+  "image",
   "contributor",
   "rights",
   "review",
@@ -24,7 +26,7 @@
  ],
  "properties": {
   "schema": {
-   "const": "world-table-contribution/1"
+   "const": "world-table-contribution/2"
   },
   "id": {
    "type": "string",
@@ -101,7 +103,7 @@
   },
   "ingredients": {
    "type": "array",
-   "minItems": 1,
+   "minItems": 2,
    "maxItems": 60,
    "items": {
     "type": "object",
@@ -179,7 +181,8 @@
     "type": "string",
     "pattern": "^[a-z][a-z0-9-]{1,24}$"
    },
-   "description": "Extra lowercase tags (ingredient words, techniques). Country, category and difficulty are added by the website."
+   "description": "Two to twelve accepted lowercase subject tags. The form may suggest these after ingredients are entered. Country, category and difficulty are separate first-class fields and do not count toward this minimum.",
+   "minItems": 2
   },
   "dietsSuggested": {
    "type": "array",
@@ -204,6 +207,7 @@
      "additionalProperties": false,
      "required": [
       "file",
+      "alt",
       "rightsConfirmed"
      ],
      "properties": {
@@ -217,6 +221,12 @@
       },
       "rightsConfirmed": {
        "const": true
+      },
+      "alt": {
+       "type": "string",
+       "minLength": 5,
+       "maxLength": 160,
+       "description": "Plain-language description of the finished 4:3 recipe image for accessibility."
       }
      }
     }
@@ -286,6 +296,17 @@
      "type": "string",
      "maxLength": 300,
      "description": "Required when source is book-or-website: how permission was given."
+    },
+    "sourceTitle": {
+     "type": "string",
+     "maxLength": 140,
+     "description": "Optional public source title when the recipe is adapted from a book or website."
+    },
+    "sourceUrl": {
+     "type": "string",
+     "pattern": "^https://[^\\s]{3,240}$",
+     "maxLength": 250,
+     "description": "Optional Director-reviewed HTTPS source URL. Raw contributor text still cannot contain links."
     }
    }
   },
@@ -321,6 +342,11 @@
       }
      },
      "additionalProperties": false
+    },
+    "submissionId": {
+     "type": "string",
+     "pattern": "^WT-SUB-[A-Z0-9-]{6,64}$",
+     "description": "Optional moderation receipt ID linking the approved public record to the private submission."
     }
    }
   },
