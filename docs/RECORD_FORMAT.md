@@ -1,55 +1,75 @@
-# Record format (version 1)
+# Record format (version 2)
 
-One approved recipe = one file: `recipes/<slug>.json`. A worked example is in `examples/example-tomato-bruschetta.json`.
-The machine-readable version is `schema/recipe.schema.json`. `tools/validate.py` enforces it and explains any problem in plain English.
+One **approved** recipe = one file: `recipes/<slug>.json`. A worked example is in `examples/example-tomato-bruschetta.json`.
+The machine-readable contract is `schema/recipe.schema.json`. `tools/validate.py` enforces the repository rules in plain English.
+
+Version 2 is the first form-ready approved record. It preserves the V1 vocabulary while making three decisions explicit:
+**country is required, a recipe needs at least two ingredients, and an approved recipe needs at least two subject tags.**
 
 ## Fields
 | Field | Required | Notes |
 |---|---|---|
-| `schema` | yes | Always `world-table-contribution/1` |
+| `schema` | yes | Always `world-table-contribution/2` |
 | `id` | yes | Always `community#` + slug |
 | `slug` | yes | Lowercase letters, numbers, hyphens. **Must match the file name** |
 | `title` | yes | 2 to 90 characters |
-| `summary` | yes | One or two sentences, 10 to 300 characters |
-| `country` | yes | 2-letter ISO code (`IT`, `AU`...) or **`ZZ` = World (undeclared)** |
+| `summary` | yes | The recipe intro shown on the site, 10 to 300 characters |
+| `country` | yes | 2-letter ISO code (`IT`, `AU`...) or **`ZZ` = World / multiple or undeclared origin** |
 | `category` | yes | `main` `soup` `dessert` `snack` `breakfast` `bread` `side` `salad` `sauce` `drink` |
 | `difficulty` | yes | `easy` `medium` `hard` |
-| `facts` | yes | `prepMinutes`, `cookMinutes` (whole numbers), `servings` (1 to 100) |
-| `ingredients` | yes | List of `{quantity, unit, name, note?, scaling?, originalText?}`. See below |
-| `steps` | yes | List of 1 to 40 steps, each 10 to 600 characters |
-| `tags` | no | Up to 12 extra lowercase tags (ingredient words, techniques) |
-| `dietsSuggested` | no | `vegetarian` `vegan` `gluten-free` `pescatarian`. **Suggestions only.** The website re-checks them and never trusts these |
-| `image` | yes | `null`, or `{file, creditName?, rightsConfirmed: true}`. No photo without confirmed rights |
-| `contributor` | yes | `{displayName, credit, dedication?}`. `credit: false` means shown as "community contributor" |
-| `rights` | yes | `{source, confirmedAt, licence, via, evidence?, permissionNote?}` |
-| `review` | yes | `{status: "approved", approvedAt, approvedBy, rulesVersions}` |
-| `addedAt` | yes | Date, `YYYY-MM-DD` |
+| `facts` | yes | `prepMinutes`, `cookMinutes`, `servings` |
+| `ingredients` | yes | **2 to 60** structured ingredient rows |
+| `steps` | yes | 1 to 40 method steps, each 10 to 600 characters |
+| `tags` | yes | **2 to 12** accepted subject tags. Country/category/difficulty do not count |
+| `dietsSuggested` | no | Suggestions only. The website re-checks diets independently |
+| `image` | yes | `null`, or `{file, alt, creditName?, rightsConfirmed: true}` |
+| `contributor` | yes | `{displayName, credit, dedication?}` |
+| `rights` | yes | provenance and permission record; approved source title/URL may be added by the Director |
+| `review` | yes | approved decision, rule versions, optional private-submission receipt ID |
+| `addedAt` | yes | `YYYY-MM-DD` |
 
 ## Ingredients
-- `unit` is one of: `g` `kg` `ml` `l` `tsp` `tbsp` `piece` `clove` `pinch` `sprig` `slice` `toTaste`
-- For `toTaste`, `quantity` must be `null`. For every other unit it must be a number.
-- Convert to these units when entering (2 cups of flour becomes grams). Keep what the person typed in `originalText` for the record.
-- `scaling` is optional (`linear`, `damped`, `fixed`). If left out, the website decides.
+Each ingredient is `{quantity, unit, name, note?, scaling?, originalText?}`.
+- `unit`: `g` `kg` `ml` `l` `tsp` `tbsp` `piece` `clove` `pinch` `sprig` `slice` `toTaste`
+- `toTaste` uses `quantity: null`; every other unit needs a number.
+- The form can retain what the contributor typed in `originalText` while normalising the public row.
+- `scaling` is optional: `linear`, `damped`, `fixed`.
+
+## Tags
+The contribution form should suggest tags **after ingredients have been committed**, because that is when the form has enough information to help.
+The contributor can accept/remove suggestions before preview. The approved record must contain at least two meaningful tags.
+Country, category and difficulty are already first-class fields and do not consume the two-tag minimum.
+
+## Images
+The form should prepare the image **before** it reaches Git:
+- recommended presentation: **4:3**
+- recommended working size: about **1600 × 1200 px**
+- JPG, PNG or WebP
+- crop/resize/compress client-side where possible
+- contributor must confirm rights
+- `alt` text is required for an approved image
+- repository validator currently limits the final file to 600 KB and notes images larger than 1600 px on the long side
 
 ## Rights
-- `source`: `own`, `family`, or `book-or-website`. A book or website needs a `permissionNote` saying how permission was given.
-- `via`: how it arrived (`form`, `facebook`, `email`). `evidence` says where, with **no links** (for example a screenshot file name).
-- `licence` is always `CC-BY-SA-4.0`.
+`source` remains `own`, `family`, or `book-or-website`.
+A book/website source requires `permissionNote`. After Director review, the approved record may also carry `sourceTitle` and an HTTPS `sourceUrl`.
+Raw contributor text still cannot contain links, email addresses or social handles.
 
-## The rules (same as the website)
-English only, no links or email addresses or @handles, family-friendly. The text rules live in `rules/text-rules-v1.json`, a copy of the site's file. If the site's version changes, copy the new one over.
+## Review
+Only **approved** records belong in this repository. A public form submission is not an approved Git record.
+`review.submissionId` may link the approved record to the private moderation receipt without publishing the private moderation data itself.
 
-## Dedications and credits
-The one-line `dedication` and the contributor's name appear on the recipe's page on the website. **They are not printed inside cookbooks.** A cookbook has one title and one dedication of its own, and a credits page lists contributors by name (those who set `credit: true`; the rest appear as "community contributors").
+## Planned form → Git boundary
+The public website form creates a **private pending submission**, not a Git recipe:
 
-## How the website will use these (planned, not built yet)
-| Here | Becomes on the site |
-|---|---|
-| `title`, `summary` | `title`, `summary` |
-| `ingredients` | ingredient names plus detail rows (the name and note are wrapped as `{"en": ...}` like the main collection) |
-| `steps` | `steps` |
-| `facts` | the "Prep 20 min / Cook 45 min / 4 servings" facts |
-| `country`, `category`, `difficulty`, ingredient words, `tags` | the tag row |
-| verified diet labels | computed by the website's rules, **not** copied from `dietsSuggested` |
-| `image.file` | the recipe image |
-| `contributor`, `rights`, `review` | the provenance shown with the recipe |
+`public form → private moderation record → Director approval → world-table-contribution/2 → Git → pinned website build`
+
+That separation prevents a user from creating an `approved` Git record themselves.
+
+## Website mapping
+The World Table can map V2 directly:
+- `title`, `summary`, `country`, `category`, `difficulty`, `facts`
+- structured `ingredients` and `steps`
+- verified tags and separately re-computed diet labels
+- optional prepared image
+- contributor/provenance/review metadata

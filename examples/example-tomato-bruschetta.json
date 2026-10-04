@@ -1,5 +1,5 @@
 {
- "schema": "world-table-contribution/1",
+ "schema": "world-table-contribution/2",
  "id": "community#example-tomato-bruschetta",
  "slug": "example-tomato-bruschetta",
  "title": "Example: tomato bruschetta",
@@ -86,7 +86,8 @@
   "rulesVersions": {
    "veg": "1.1.0",
    "text": "1.0.0"
-  }
+  },
+  "submissionId": "WT-SUB-EXAMPLE-0001"
  },
  "addedAt": "2026-10-03"
 }

@@ -11,7 +11,7 @@ recipes that people share, reviewed and approved by the Director, with who contr
 | `recipes/` | **Approved** recipes, one JSON file each (`recipes/<slug>.json`). Only approved recipes go here. |
 | `images/` | Photos for those recipes, only where the contributor confirmed they own the photo. |
 | `examples/` | A worked example of the record format. Not published. |
-| `schema/` | The record format as a JSON Schema (for editors and humans). |
+| `schema/` | The approved-record JSON Schema (currently `world-table-contribution/2`). |
 | `rules/` | A copy of the site's text rules (English only, no links, family-friendly). |
 | `tools/` | `validate.py` checks every recipe. `test_validate.py` tests the checker itself. |
 | `docs/` | `GIT_FIRST_TIME.md` (start here if Git is new to you) and `RECORD_FORMAT.md`. |
@@ -33,4 +33,4 @@ See `docs/GIT_FIRST_TIME.md` for adding the official licence text (a `LICENSE` f
 - **Run the checker** (or let GitHub do it: see `docs/GIT_FIRST_TIME.md`) before relying on a change.
 
 ## Status
-Starter structure. The step that merges these recipes into the website is not built yet.
+Repository and validation workflow are live. Contribution schema V2 is the form-ready approved-record contract. The public Add a Recipe form and the build step that merges approved recipes into the website are the next pieces.

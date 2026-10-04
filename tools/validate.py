@@ -31,7 +31,7 @@ WARN_IMAGE_PX = 1600
 TOP_FIELDS = {'schema', 'id', 'slug', 'title', 'summary', 'country', 'category', 'difficulty', 'facts', 'ingredients', 'steps',
               'tags', 'dietsSuggested', 'image', 'contributor', 'rights', 'review', 'addedAt'}
 REQUIRED = ['schema', 'id', 'slug', 'title', 'summary', 'country', 'category', 'difficulty', 'facts', 'ingredients', 'steps',
-            'contributor', 'rights', 'review', 'addedAt']
+            'tags', 'image', 'contributor', 'rights', 'review', 'addedAt']
 
 # ---- text rules (the SAME rules file the website and server read) ----
 _ranges = ''.join('\\U%08x-\\U%08x' % (a, b) for a, b in TEXT_RULES['englishAllowedRanges'])
@@ -109,8 +109,8 @@ def check_record(rec, filename, root):
             return None
         return v
 
-    if rec['schema'] != 'world-table-contribution/1':
-        E.append("'schema' must be exactly world-table-contribution/1")
+    if rec['schema'] != 'world-table-contribution/2':
+        E.append("'schema' must be exactly world-table-contribution/2")
     slug = rec['slug']
     if not isinstance(slug, str) or not SLUG.match(slug):
         E.append("'slug' must be lowercase letters, numbers and hyphens, 3 to 61 characters")
@@ -136,8 +136,8 @@ def check_record(rec, filename, root):
                 E.append("facts.%s must be a whole number from %d to %d" % (k, lo, hi))
 
     ing = rec['ingredients']
-    if not isinstance(ing, list) or not (1 <= len(ing) <= 60):
-        E.append("'ingredients' must be a list of 1 to 60 items")
+    if not isinstance(ing, list) or not (2 <= len(ing) <= 60):
+        E.append("'ingredients' must be a list of 2 to 60 items")
     else:
         for n, row in enumerate(ing, 1):
             tag = 'ingredient %d' % n
@@ -183,8 +183,8 @@ def check_record(rec, filename, root):
                 if p: E.append('step %d %s' % (n, p))
 
     tags = rec.get('tags', [])
-    if not isinstance(tags, list) or len(tags) > 12 or len(set(map(str, tags))) != len(tags):
-        E.append("'tags' must be a list of up to 12 different tags")
+    if not isinstance(tags, list) or not (2 <= len(tags) <= 12) or len(set(map(str, tags))) != len(tags):
+        E.append("'tags' must be a list of 2 to 12 different tags")
     else:
         for t in tags:
             if not isinstance(t, str) or not TAG.match(t):
@@ -200,11 +200,17 @@ def check_record(rec, filename, root):
 
     img = rec.get('image')
     if img is not None:
-        if not isinstance(img, dict) or set(img) - {'file', 'creditName', 'rightsConfirmed'}:
-            E.append("'image' must be null, or have only file, creditName and rightsConfirmed")
+        if not isinstance(img, dict) or set(img) - {'file', 'alt', 'creditName', 'rightsConfirmed'}:
+            E.append("'image' must be null, or have only file, alt, creditName and rightsConfirmed")
         else:
             if img.get('rightsConfirmed') is not True:
                 E.append('image.rightsConfirmed must be true. Without that, publish the recipe without its photo (use "image": null)')
+            alt = img.get('alt')
+            if not isinstance(alt, str) or not (5 <= len(alt.strip()) <= 160):
+                E.append('image.alt must be 5 to 160 characters of plain-language image description')
+            else:
+                p = text_problem(alt)
+                if p: E.append('image.alt ' + p)
             fl = img.get('file')
             if not isinstance(fl, str) or not IMG_FILE.match(fl):
                 E.append("image.file must look like images/your-slug.jpg (jpg, jpeg, png or webp)")
@@ -239,7 +245,7 @@ def check_record(rec, filename, root):
                 if p: E.append('contributor.%s %s' % (k, p))
 
     r = rec['rights']
-    if not isinstance(r, dict) or set(r) - {'source', 'confirmedAt', 'licence', 'via', 'evidence', 'permissionNote'}:
+    if not isinstance(r, dict) or set(r) - {'source', 'confirmedAt', 'licence', 'via', 'evidence', 'permissionNote', 'sourceTitle', 'sourceUrl'}:
         E.append("'rights' has missing or unknown fields")
     else:
         if r.get('source') not in SOURCES: E.append('rights.source must be: ' + ', '.join(SOURCES))
@@ -248,19 +254,25 @@ def check_record(rec, filename, root):
         if not (isinstance(r.get('confirmedAt'), str) and valid_date(r['confirmedAt'])): E.append('rights.confirmedAt must be a date like 2026-10-03')
         if r.get('source') == 'book-or-website' and not str(r.get('permissionNote', '')).strip():
             E.append("a recipe from a book or website needs rights.permissionNote saying how permission was given")
-        for k in ('evidence', 'permissionNote'):
+        for k in ('evidence', 'permissionNote', 'sourceTitle'):
             if isinstance(r.get(k), str):
                 p = text_problem(r[k])
                 if p: E.append('rights.%s %s' % (k, p))
+        if 'sourceUrl' in r:
+            u = r.get('sourceUrl')
+            if not isinstance(u, str) or not re.match(r'^https://[^\s]{3,240}$', u) or len(u) > 250:
+                E.append('rights.sourceUrl must be a Director-reviewed HTTPS URL up to 250 characters')
 
     rv = rec['review']
-    if not isinstance(rv, dict) or set(rv) - {'status', 'approvedAt', 'approvedBy', 'rulesVersions'} or any(k not in rv for k in ('status', 'approvedAt', 'approvedBy', 'rulesVersions')):
+    if not isinstance(rv, dict) or set(rv) - {'status', 'approvedAt', 'approvedBy', 'rulesVersions', 'submissionId'} or any(k not in rv for k in ('status', 'approvedAt', 'approvedBy', 'rulesVersions')):
         E.append("'review' needs status, approvedAt, approvedBy and rulesVersions")
     else:
         if rv['status'] != 'approved': E.append("review.status must be 'approved'. Only approved recipes belong in this repository")
         if not (isinstance(rv['approvedAt'], str) and valid_date(rv['approvedAt'])): E.append('review.approvedAt must be a date like 2026-10-03')
         if not isinstance(rv['approvedBy'], str) or not rv['approvedBy'].strip(): E.append('review.approvedBy must be filled in')
         if not isinstance(rv['rulesVersions'], dict): E.append('review.rulesVersions must be an object')
+        if 'submissionId' in rv and (not isinstance(rv['submissionId'], str) or not re.match(r'^WT-SUB-[A-Z0-9-]{6,64}$', rv['submissionId'])):
+            E.append("review.submissionId must look like WT-SUB-...")
     if not (isinstance(rec['addedAt'], str) and valid_date(rec['addedAt'])):
         E.append("'addedAt' must be a date like 2026-10-03")
     return E, W
