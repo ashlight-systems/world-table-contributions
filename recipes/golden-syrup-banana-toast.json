@@ -1,0 +1,96 @@
+{
+    "schema": "world-table-contribution/2",
+    "id": "community#golden-syrup-banana-toast",
+    "slug": "golden-syrup-banana-toast",
+    "title": "Golden Syrup Banana Toast",
+    "summary": "Warm buttered toast topped with sliced banana, a little golden syrup and cinnamon for a quick breakfast or snack.",
+    "country": "AU",
+    "category": "breakfast",
+    "difficulty": "easy",
+    "facts": {
+        "prepMinutes": 3,
+        "cookMinutes": 3,
+        "servings": 1
+    },
+    "ingredients": [
+        {
+            "quantity": 2,
+            "unit": "slice",
+            "name": "bread",
+            "note": "",
+            "originalText": "2 slices bread"
+        },
+        {
+            "quantity": 1,
+            "unit": "piece",
+            "name": "banana",
+            "note": "sliced",
+            "originalText": "1 banana, sliced"
+        },
+        {
+            "quantity": 1,
+            "unit": "tbsp",
+            "name": "butter",
+            "note": "softened",
+            "originalText": "1 tbsp butter, softened"
+        },
+        {
+            "quantity": 2,
+            "unit": "tsp",
+            "name": "golden syrup",
+            "note": "",
+            "originalText": "2 tsp golden syrup"
+        },
+        {
+            "quantity": 1,
+            "unit": "pinch",
+            "name": "ground cinnamon",
+            "note": "",
+            "originalText": "1 pinch ground cinnamon"
+        }
+    ],
+    "steps": [
+        "Toast the bread until golden and crisp around the edges.",
+        "Spread the hot toast with the softened butter.",
+        "Arrange the sliced banana over the toast and drizzle with the golden syrup.",
+        "Finish with a small pinch of ground cinnamon and serve immediately."
+    ],
+    "tags": [
+        "banana",
+        "toast",
+        "breakfast",
+        "cinnamon",
+        "golden-syrup"
+    ],
+    "dietsSuggested": [
+        "vegetarian"
+    ],
+    "image": {
+        "file": "images/golden-syrup-banana-toast-dc7cbd0f.jpg",
+        "alt": "Two slices of golden-brown toast topped with sliced banana, golden syrup and a light dusting of cinnamon on a ceramic plate.",
+        "rightsConfirmed": true,
+        "creditName": "AI-generated image for Ashlight Systems"
+    },
+    "contributor": {
+        "displayName": "Agent Sol",
+        "credit": true,
+        "dedication": ""
+    },
+    "rights": {
+        "source": "own",
+        "confirmedAt": "2026-10-08",
+        "licence": "CC-BY-SA-4.0",
+        "via": "form"
+    },
+    "review": {
+        "status": "approved",
+        "approvedAt": "2026-10-08",
+        "approvedBy": "director",
+        "rulesVersions": {
+            "veg": "1.1.0",
+            "text": "1.0.0"
+        },
+        "submissionId": "WT-SUB-20261005-61E743F854"
+    },
+    "addedAt": "2026-10-08"
+}

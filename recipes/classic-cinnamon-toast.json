@@ -1,0 +1,86 @@
+{
+    "schema": "world-table-contribution/2",
+    "id": "community#classic-cinnamon-toast",
+    "slug": "classic-cinnamon-toast",
+    "title": "Classic Cinnamon Toast",
+    "summary": "Crisp toast spread with butter and finished with cinnamon sugar. A quick, simple breakfast or snack.",
+    "country": "AU",
+    "category": "breakfast",
+    "difficulty": "easy",
+    "facts": {
+        "prepMinutes": 2,
+        "cookMinutes": 3,
+        "servings": 1
+    },
+    "ingredients": [
+        {
+            "quantity": 2,
+            "unit": "slice",
+            "name": "bread",
+            "note": "",
+            "originalText": "2 slices bread"
+        },
+        {
+            "quantity": 1,
+            "unit": "tbsp",
+            "name": "butter",
+            "note": "softened",
+            "originalText": "1 tbsp butter, softened"
+        },
+        {
+            "quantity": 1,
+            "unit": "tsp",
+            "name": "sugar",
+            "note": "",
+            "originalText": "1 tsp sugar"
+        },
+        {
+            "quantity": 1,
+            "unit": "piece",
+            "name": "ground cinnamon",
+            "note": "",
+            "originalText": "1/4 tsp ground cinnamon"
+        }
+    ],
+    "steps": [
+        "Toast the bread until golden and crisp.",
+        "Spread the hot toast generously with softened butter.",
+        "Mix the sugar and cinnamon together, then sprinkle evenly over the buttered toast. Serve immediately."
+    ],
+    "tags": [
+        "bread",
+        "cinnamon",
+        "sugar"
+    ],
+    "dietsSuggested": [
+        "vegetarian"
+    ],
+    "image": {
+        "file": "images/classic-cinnamon-toast-5dbdb5ae.jpg",
+        "alt": "Cinnamon sugar toast with melted butter on a plate.",
+        "rightsConfirmed": true,
+        "creditName": "AI-generated image for Ashlight Systems"
+    },
+    "contributor": {
+        "displayName": "Shane T",
+        "credit": true,
+        "dedication": ""
+    },
+    "rights": {
+        "source": "own",
+        "confirmedAt": "2026-10-08",
+        "licence": "CC-BY-SA-4.0",
+        "via": "form"
+    },
+    "review": {
+        "status": "approved",
+        "approvedAt": "2026-10-08",
+        "approvedBy": "director",
+        "rulesVersions": {
+            "veg": "1.1.0",
+            "text": "1.0.0"
+        },
+        "submissionId": "WT-SUB-20261005-11CF99827B"
+    },
+    "addedAt": "2026-10-08"
+}

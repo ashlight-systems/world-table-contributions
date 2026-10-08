@@ -1,0 +1,109 @@
+{
+    "schema": "world-table-contribution/2",
+    "id": "community#classic-curried-eggs",
+    "slug": "classic-curried-eggs",
+    "title": "Classic Curried Eggs",
+    "summary": "Creamy curried eggs made with KEEN'S Curry Powder and Hellmann's Whole Egg Mayonnaise, seasoned simply with salt and pepper. Perfect on hot buttered toast or in a curried egg and lettuce sandwich.",
+    "country": "AU",
+    "category": "snack",
+    "difficulty": "easy",
+    "facts": {
+        "prepMinutes": 10,
+        "cookMinutes": 10,
+        "servings": 4
+    },
+    "ingredients": [
+        {
+            "quantity": 6,
+            "unit": "piece",
+            "name": "eggs",
+            "note": "",
+            "originalText": "6 piece eggs"
+        },
+        {
+            "quantity": 3,
+            "unit": "tbsp",
+            "name": "Hellmann's Whole Egg Mayonnaise",
+            "note": "",
+            "originalText": "3 tbsp Hellmann's Whole Egg Mayonnaise"
+        },
+        {
+            "quantity": 1.5,
+            "unit": "tsp",
+            "name": "KEEN'S Curry Powder",
+            "note": "",
+            "originalText": "1.5 tsp KEEN'S Curry Powder"
+        },
+        {
+            "quantity": 1,
+            "unit": "pinch",
+            "name": "salt",
+            "note": "to taste",
+            "originalText": "1 pinch salt, to taste"
+        },
+        {
+            "quantity": 1,
+            "unit": "pinch",
+            "name": "black pepper",
+            "note": "to taste",
+            "originalText": "1 pinch black pepper, to taste"
+        },
+        {
+            "quantity": 8,
+            "unit": "slice",
+            "name": "bread or toast",
+            "note": "to serve",
+            "originalText": "8 slice bread or toast, to serve"
+        },
+        {
+            "quantity": 4,
+            "unit": "leaf",
+            "name": "lettuce leaves",
+            "note": "optional for sandwiches",
+            "originalText": "4 leaf lettuce leaves, optional for sandwiches"
+        }
+    ],
+    "steps": [
+        "Place the eggs in a saucepan and cover with cold water. Bring to the boil, then cook until hard-boiled, about 9–10 minutes.",
+        "Drain the eggs and cool them under cold running water. Peel and roughly chop or mash them with a fork.",
+        "Add the Hellmann's Whole Egg Mayonnaise and KEEN'S Curry Powder. Mix until creamy but still slightly textured.",
+        "Season with salt and black pepper to taste. Add a little more curry powder or mayonnaise if you prefer a stronger or creamier mixture.",
+        "Serve on hot buttered toast, or spoon onto bread with crisp lettuce for a curried egg and lettuce sandwich."
+    ],
+    "tags": [
+        "eggs",
+        "mayonnaise",
+        "curry"
+    ],
+    "dietsSuggested": [
+        "vegetarian"
+    ],
+    "image": {
+        "file": "images/classic-curried-eggs-d45548e6.jpg",
+        "alt": "Bowl of creamy curried egg made with chopped eggs, whole egg mayonnaise and curry powder, served with thick toast and lettuce.",
+        "rightsConfirmed": true,
+        "creditName": "AI image for Shane T"
+    },
+    "contributor": {
+        "displayName": "Shane T",
+        "credit": true,
+        "dedication": "For Nanna"
+    },
+    "rights": {
+        "source": "family",
+        "confirmedAt": "2026-10-08",
+        "licence": "CC-BY-SA-4.0",
+        "via": "form"
+    },
+    "review": {
+        "status": "approved",
+        "approvedAt": "2026-10-08",
+        "approvedBy": "director",
+        "rulesVersions": {
+            "veg": "1.1.0",
+            "text": "1.0.0"
+        },
+        "submissionId": "WT-SUB-20261004-A873A848BE"
+    },
+    "addedAt": "2026-10-08"
+}
